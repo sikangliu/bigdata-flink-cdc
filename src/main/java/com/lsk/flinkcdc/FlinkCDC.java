@@ -31,16 +31,6 @@ public class FlinkCDC {
         //2.6 设置访问 HDFS 的用户名
         System.setProperty("HADOOP_USER_NAME", "atguigu");
         //3.创建 Flink-MySQL-CDC 的 Source
-        //initial (default): Performs an initial snapshot on the monitored database tables upon
-        // first startup, and continue to read the latest binlog.
-        //latest-offset: Never to perform snapshot on the monitored database tables upon first startup,
-        // just read from the end of the binlog which means only have the changes since the connector was started.
-        //timestamp: Never to perform snapshot on the monitored database tables upon first startup,
-        // and directly read binlog from the specified timestamp.The consumer will traverse the binlog
-        // from the beginning and ignore change events whose timestamp is smaller than the specified timestamp.
-        //specific-offset: Never to perform snapshot on the monitored database tables upon first startup, and
-        // directly read
-        // binlog from the specified offset.
         DebeziumSourceFunction<String> mysqlSource = MySqlSource.<String>builder()
                 .hostname("hadoop102")
                 .port(3306)
